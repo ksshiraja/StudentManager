@@ -1,0 +1,86 @@
+<div class="container">
+    <hr>
+    <div class="row">
+        <div class="col">
+            <h2>Classes</h2>
+        </div>
+        <div class="col">
+            <a class=" btn btn-success" href="#"  data-toggle="modal" data-target="#addNew"><i class="fa fa-plus"></i> Add new</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Code</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">N° of Chapters</th>
+                    <th scope="col">Batch</th>
+                    <th scope="col">Date</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for class in classes %}
+                    <tr>
+                        <td>{{class.code}}</td>
+                        <td>{{class.subject}}</td>
+                        <td>{{class.size}}</td>
+                        <td>{{class.chaps}}</td>
+                        <td>{{class.batch}}</td>
+                        <td>{{class.date}}</td>
+                        <td><a class="btn btn-small btn-primary" href="?p=Class&id={{class.id}}">Details</a></td>
+                        <td><a class="btn btn-small btn-danger"  onclick="actions.Class.Delete('{{class.id}}')"><i class="fa fa-trash-o"></i></a></td>
+                    </tr>
+                  {% endfor %}
+                  
+              </table>  
+        </div>
+    </div>        
+</div>
+
+
+
+<div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="addNewLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addNewLabel">New Class</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="class-code">Class code</label>
+                <input type="text" class="form-control" id="class-code">
+            </div>  
+            <div class="form-group">
+                <label for="class-subject">Class subject</label>
+                <input type="text" class="form-control" id="class-subject">
+            </div>  
+            <div class="form-group">
+                <label for="class-size">Class size</label>
+                <input type="number" class="form-control" id="class-size">
+            </div> 
+            <div class="form-group">
+                <label for="class-chaps">No. of Chapters</label>
+                <input type="number" class="form-control" id="class-chaps">
+            </div> 
+            <div class="form-group">
+                <label for="class-code">Batch</label>
+                <input type="text" class="form-control" id="class-batch">
+            </div>    
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="save-class" >Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

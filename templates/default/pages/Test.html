@@ -1,0 +1,44 @@
+{% if test.added_by == S.loggedas %}
+<div class="container">
+    <hr>
+    <div class="row">
+        <div class="col">
+            <h2>{{test.name}}</h2> by {{test.added_by}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Question</th>
+                    <th scope="col">Chapter</th>
+                    <th scope="col">Max Mark</th> 
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for question in questions %}
+                    {% set q = explode(question.question, "# #i") %}
+                    <tr>
+                        <td>{{q[0]}}</td> 
+                        <td>{{q[1]}}</td> 
+                        <td>{{question.max_mark}}</td> 
+                    </tr>
+                  {% endfor %}
+                  
+              </table>  
+        </div>
+    </div>     
+ 
+</div>
+
+
+
+{% else %}
+    <div class="container">
+        <div class="alert alert-dark">
+            You do not have access to this page
+        </div>
+    </div>
+{% endif %}

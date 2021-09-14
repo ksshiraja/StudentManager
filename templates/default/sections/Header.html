@@ -1,0 +1,70 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#toggler" aria-controls="toggler" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="toggler">
+    <a class="navbar-brand" href="#"> StuMan </a>
+    {% if S.loggedin %}
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" >Hello {{S.loggedas}}!</a>
+      </li>  
+
+      <li class="nav-item">
+        <a class="nav-link" data-page="Tests" href="?p=Tests">Tests</a>
+      </li> 
+      <li class="nav-item">
+        <a class="nav-link" data-page="Classes" href="?p=Classes">Classes</a>
+      </li>  
+      
+      <li class="nav-item">
+        <a class="nav-link btn btn-danger" href="#" onclick="actions.User.Logout()">Logout</a>
+      </li>  
+      <li class="nav-item"> &nbsp;</li>
+      <li class="nav-item">
+        <a class="nav-link btn btn-info " data-toggle="modal" data-target="#modalSettings"><i class="fa fa-cog"></i> Change Password</a>
+      </li> 
+    </ul>
+
+    {% else %}
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" data-page="Login" href="?p=Login">Login  </a>
+      </li> 
+      <li class="nav-item">
+        <a class="nav-link" data-page="Register" href="?p=Register">Register</a>
+      </li>  
+    </ul>
+
+  {% endif %}
+
+  </div>
+</nav> 
+
+<div class="modal fade" id="modalSettings" tabindex="-1" role="dialog" aria-labelledby="modalSettingsLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalSettingsLabel">Change Settings</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+              <label for="current-pw">Current Password</label>
+              <input type="password" class="form-control" id="current-pw">
+          </div>
+          <div class="form-group">
+              <label for="new-pw">New Password</label>
+              <input type="password" class="form-control" id="new-pw">          
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="actions.User.Change()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

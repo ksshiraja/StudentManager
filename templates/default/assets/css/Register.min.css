@@ -1,0 +1,78 @@
+.page-title {
+  margin: auto;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 60px;
+  margin-top: 60px;
+}
+
+#registerPage {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -ms-grid-columns: 1fr 2fr;
+      grid-template-columns: 1fr 2fr;
+  grid-row-gap: 10px;
+  max-width: 400px;
+  margin: auto;
+}
+
+#registerPage .label {
+  background: #503e31;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  border-bottom: 2px #503e31 solid;
+  border-top: 2px #503e31 solid;
+}
+
+#registerPage .label label {
+  width: 100%;
+  color: white;
+  text-align: right;
+  margin-top: 4px;
+}
+
+#registerPage .input {
+  width: 100%;
+}
+
+#registerPage .input input {
+  padding: 16px;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-bottom: 2px #503e31 solid;
+  border-top: 2px #503e31 solid;
+  border-right: 2px #503e31 solid;
+}
+
+#registerPage .submit {
+  background-image: -webkit-gradient(linear, left top, right top, from(#503e31), to(chocolate));
+  background-image: linear-gradient(to right, #503e31, chocolate);
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+#registerPage .submit:hover {
+  -webkit-filter: brightness(125%);
+          filter: brightness(125%);
+  background-position: -100% 0;
+}
+/*# sourceMappingURL=Register.min.css.map */

@@ -1,0 +1,60 @@
+* {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.logo {
+  max-height: 30px;
+  margin-bottom: 7px;
+}
+
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+  visibility: hidden;
+}
+
+.selected {
+  color: chocolate !important;
+}
+
+.btn-add, .btn-small {
+  color: white !important;
+  -webkit-transition: .2s all ease-in-out;
+  transition: .2s all ease-in-out;
+  cursor: pointer;
+}
+
+.btn-small, .small-link {
+  font-size: 12px !important;
+}
+
+.small-link {
+  float: right !important;
+}
+
+#notification {
+  margin-top: 3px;
+}
+/*# sourceMappingURL=main.min.css.map */

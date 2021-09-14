@@ -1,0 +1,170 @@
+{% if student.added_by == S.loggedas %}
+<div class="container" id="content">
+    <hr>
+    <div class="row">
+        <div class="col"> 
+            <h3>{{student.firstname}} {{student.lastname}}</h3>
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col">
+            <h4>Tests</h4>
+        </div>
+        <div class="col">
+            <input list="tests" id="test">
+
+            <datalist id="tests">
+                {% for test in tests %}
+                    <option value="{{test.name}}">{{test.name}}</option>
+                {% endfor %}
+            </datalist>
+            <a class=" btn btn-success" href="#"  data-toggle="modal" id="add-test"><i class="fa fa-plus"></i> Add new</a>
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Test name</th>
+                    <th scope="col">Date</th> 
+                    <th scope="col"></th> 
+                    <th scope="col">Reflection</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for student_test in student_tests %}
+                    <tr>
+                        <td>{{student_test.test}}</td> 
+                        <td>{{student_test.date}}</td> 
+                        <td><a class="btn btn-small btn-primary seeResults" data-date="{{student_test.date}}" data-test="{{student_test.test}}" data-student="{{student_test.student}}" data-toggle="modal">Test Results</a></td>
+                        <td class="row">
+                          <div class="col">
+                            <input id="ref-{{student_test.id}}" data-id="{{student_test.id}}" placeholder="{{student_test.reflection}}" type="text" class="form-control"/>
+                          </div>
+                          <div class="col">
+                            <button class="btn btn-add btn-success updateRef" data-for="{{student_test.id}}">Update</button>                          
+                          </div>
+                         
+                          <div class="col">
+                            <button class="btn btn-add btn-danger fa fa-trash" onclick="actions.Student.deleteTest('{{student_test.student}}', '{{student_test.test}}')"></button>                          
+                          </div>
+                        </td> 
+
+                    </tr>
+                    {% if last_test == student_test.test %}
+                      
+                    {% endif %}
+                    {% set last_test = student_test.test %}
+                    {% endfor %}
+              </table>  
+        </div>
+    </div>   
+    <div id="charts" class="container">
+      <div class="row">
+        <div class="col-md-3" >
+        </div>
+        <div class="col-md-6" >
+          <canvas id="pieChart"></canvas>
+        </div>
+        <div class="col-md-3" >
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6"><a href="#" id="pdfPie">Export to PDF</a></div> 
+        <div class="col-md-3"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">{{focus}}</div>
+        <div class="col-md-3"></div>
+      </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="addNewLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addNewLabel">Add test for student</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <input type="hidden" id="student" value="{{student.id}}" />
+        <div class="modal-body" id='questions'>
+              
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="add-student-marks" >Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="modal fade" id="TestModal" tabindex="-1" role="dialog" aria-labelledby="TestModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="TestModalLabel">Test Results</h5>   <h6 id="resultsDate"></h6>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> 
+        <div class="modal-body" id='results'>
+              
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function getRandomColor() {
+      var letters = '0123456789ABCDEF'.split('');
+      var color = '#';
+      for (var i = 0; i < 6; i++ ) {
+          color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+  }
+    var ctx = document.getElementById('pieChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: [{% for label in plabels %} 'Chapter {{label}}', {% endfor %} ],
+            datasets: [{
+                label: 'Max Mark per Test',
+                data: [{% for total in ptotals %} {{total}}, {% endfor %} ],
+                backgroundColor: [{% for total in ptotals %}  getRandomColor(), {% endfor %} ],
+                borderColor:  [{% for total in ptotals %} "white", {% endfor %} ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    </script>
+{% else %}
+    <div class="container">
+        <div class="alert alert-dark">
+            You do not have access to this page
+        </div>
+    </div>
+
+    
+{% endif %}

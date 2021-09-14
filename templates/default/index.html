@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        {% include 'sections/Head.html' %}
+
+        <script type="text/javascript">
+            window.currentPage = "{{content}}";
+        </script>
+    </head>
+<body style="-webkit-app-region: drag;">
+
+    {% include 'sections/Header.html' %}
+
+    <div id="main">
+        
+        {% include 'pages/' ~ content ~ '.html' %} 
+    </div>
+
+
+    {% include 'sections/Footer.html' %} 
+
+    {% include 'sections/Foot.html' %}
+    
+</body>
+
+</html>
